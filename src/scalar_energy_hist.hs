@@ -23,10 +23,11 @@ main = do
     histograms infile
       where
         histograms infile = do
-            h <- withFile infile ReadMode (getEnergyHist 110 0.0 220.0)
-            (mapM_ putStrLn . showHist) h
+            h <- withFile infile ReadMode (getEnergyHist 125 0.0 250.0)
+            (mapM_ putStrLn . showHist . unitNormalize) h
 
-getEnergyHist :: MonadIO m => Int -> Double -> Double -> Handle -> m (Hist1D Double)
+getEnergyHist :: MonadIO m => Int -> Double -> Double -> Handle
+              -> m (Hist1D Double)
 getEnergyHist nbin lo hi hin = P.fold mappend mempty id hist
   where hist = (getEnergy . fromHandle) hin >-> P.map (histogram1 nbin lo hi)
 
