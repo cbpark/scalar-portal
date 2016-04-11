@@ -16,7 +16,7 @@ main = do
     printHist infile histCosTheta unitNormalize
 
 histCosTheta :: MonadIO m => Handle -> m (Hist1D Double)
-histCosTheta = consHist cosTheta 100 (-1) 1
+histCosTheta = consHist cosTheta 200 (-1) 1
   where
     cosTheta :: Parser Double
     cosTheta = do

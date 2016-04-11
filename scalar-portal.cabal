@@ -17,8 +17,8 @@ source-repository head
   type:                git
   location:            git@github.com:cbpark/scalar-portal.git
 
-executable scalar_energy_angle
-  main-is:             scalar_energy_angle.hs
+executable calcvar
+  main-is:             calcvar.hs
   build-depends:       base >=4.8
                      , bytestring
                      , lhef-tools

@@ -16,7 +16,7 @@ main = do
     printHist infile histE unitNormalize
 
 histE :: MonadIO m => Handle -> m (Hist1D Double)
-histE = consHist energy 125 0.0 250.0
+histE = consHist energy 210 0.0 420.0
   where
     energy :: Parser Double
     energy = do
