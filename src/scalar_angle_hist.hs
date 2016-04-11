@@ -11,18 +11,16 @@ import           System.IO
 
 main :: IO ()
 main = do
-    putStrLn $ "# " ++ intercalate ", " ["bins", "energy"]
+    putStrLn $ "# " ++ intercalate ", " ["bins", "cosTheta"]
     infile <- fmap head getArgs
-    printHist infile histE unitNormalize
+    printHist infile histCosTheta unitNormalize
 
-histE :: MonadIO m => Handle -> m (Hist1D Double)
-histE = consHist energy 125 0.0 250.0
+histCosTheta :: MonadIO m => Handle -> m (Hist1D Double)
+histCosTheta = consHist cosTheta 100 (-1) 1
   where
-    energy :: Parser Double
-    energy = do
+    cosTheta :: Parser Double
+    cosTheta = do
         skipSpace
         _ <- many' $ char '#' >> skipWhile (not . isEndOfLine) >> endOfLine
-        e <- double
-        char ',' >> skipSpace
-        _ <- double <* skipSpace
-        return e
+        _ <- double >> skipSpace >> char ',' >> skipSpace
+        double <* skipSpace
