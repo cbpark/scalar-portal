@@ -25,7 +25,7 @@ main = do
       where
         isScalar = (== 35) . idOf
 
-newtype Result = Result { getResult :: [(String, Double)]}
+newtype Result = Result { getResult :: [(String, Double)] }
 
 instance Show Result where
     show = intercalate ", " . map (show . snd) . getResult

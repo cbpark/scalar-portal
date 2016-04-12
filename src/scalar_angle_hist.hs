@@ -1,9 +1,9 @@
 module Main where
 
 import           HEP.Analysis.Histogram1D
+import           HEP.Data.LHEF                    (skipTillEnd)
 
-import           Data.Attoparsec.ByteString       (skipWhile)
-import           Data.Attoparsec.ByteString.Char8 hiding (skipWhile)
+import           Data.Attoparsec.ByteString.Char8
 import           Data.List                        (intercalate)
 import           Pipes
 import           System.Environment               (getArgs)
@@ -21,6 +21,8 @@ histCosTheta = consHist cosTheta 200 (-1) 1
     cosTheta :: Parser Double
     cosTheta = do
         skipSpace
-        _ <- many' $ char '#' >> skipWhile (not . isEndOfLine) >> endOfLine
+        _ <- many' $ char '#' >> skipTillEnd
         _ <- double >> skipSpace >> char ',' >> skipSpace
-        double <* skipSpace
+        c <- double <* skipSpace
+        skipTillEnd
+        return c

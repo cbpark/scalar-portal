@@ -1,9 +1,9 @@
 module Main where
 
 import           HEP.Analysis.Histogram1D
+import           HEP.Data.LHEF                    (skipTillEnd)
 
-import           Data.Attoparsec.ByteString       (skipWhile)
-import           Data.Attoparsec.ByteString.Char8 hiding (skipWhile)
+import           Data.Attoparsec.ByteString.Char8
 import           Data.List                        (intercalate)
 import           Pipes
 import           System.Environment               (getArgs)
@@ -21,8 +21,5 @@ histE = consHist energy 210 0.0 420.0
     energy :: Parser Double
     energy = do
         skipSpace
-        _ <- many' $ char '#' >> skipWhile (not . isEndOfLine) >> endOfLine
-        e <- double
-        char ',' >> skipSpace
-        _ <- double <* skipSpace
-        return e
+        _ <- many' $ char '#' >> skipTillEnd
+        double <* skipTillEnd
