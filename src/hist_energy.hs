@@ -1,13 +1,13 @@
 module Main where
 
-import           HEP.Analysis.Histogram1D
-import           HEP.Data.LHEF                    (skipTillEnd)
-
 import           Data.Attoparsec.ByteString.Char8
 import           Data.List                        (intercalate)
 import           Pipes
 import           System.Environment               (getArgs)
 import           System.IO
+
+import           HEP.Analysis.Histogram1D
+import           HEP.Data.LHEF                    (skipTillEnd)
 
 main :: IO ()
 main = do

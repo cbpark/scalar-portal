@@ -28,8 +28,8 @@ executable calcvar
   default-language:    Haskell2010
   ghc-options:         -Wall -O2 -threaded -funbox-strict-fields
 
-executable scalar_energy_hist
-  main-is:             scalar_energy_hist.hs
+executable hist_energy
+  main-is:             hist_energy.hs
   build-depends:       base >=4.8
                      , attoparsec
                      , hep-utilities
@@ -39,8 +39,19 @@ executable scalar_energy_hist
   default-language:    Haskell2010
   ghc-options:         -Wall -O2 -threaded -funbox-strict-fields
 
-executable scalar_angle_hist
-  main-is:             scalar_angle_hist.hs
+executable hist_costheta
+  main-is:             hist_costheta.hs
+  build-depends:       base >=4.8
+                     , attoparsec
+                     , hep-utilities
+                     , lhef-tools
+                     , pipes
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  ghc-options:         -Wall -O2 -threaded -funbox-strict-fields
+
+executable hist_pdecay
+  main-is:             hist_pdecay.hs
   build-depends:       base >=4.8
                      , attoparsec
                      , hep-utilities
