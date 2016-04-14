@@ -1,5 +1,6 @@
 module Main where
 
+import           Control.Monad                    (replicateM_)
 import           Data.Attoparsec.ByteString.Char8
 import           Data.List                        (intercalate)
 import           Pipes
@@ -22,7 +23,5 @@ histPdecay = consHist pDecay 1000 0 1
     pDecay = do
         skipSpace
         _ <- many' $ char '#' >> skipTillEnd
-        _ <- double >> skipSpace >> char ',' >> skipSpace
-        _ <- double >> skipSpace >> char ',' >> skipSpace
-        _ <- double >> skipSpace >> char ',' >> skipSpace
+        replicateM_ 3 (double >> skipSpace >> char ',' >> skipSpace)
         double <* skipTillEnd
